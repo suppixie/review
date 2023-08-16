@@ -1,77 +1,23 @@
-import React,{useState} from 'react';
-import GetReview from './productpage';
-import './App.css'
-import KeywordSearch from './keywordsearch';
-import ProductPage from './productpage';
+import './App.css';
+import React from 'react';
+// import Navbar from './navbar';
+import Home from './home'
 import { Routes, Route, } from 'react-router-dom';
+import ProductPage from './productpage';
+import KeywordSearch from './keywordsearch';
 
 
 const App = () => {
-  <div className="App">
-      {/* <Navbar /> */}
-      <Routes>
-        <Route path='/' element={<App/>}></Route>
-        <Route path='/Search_page' element={<KeywordSearch/>}></Route>
-        <Route path='/Product' element={<ProductPage />}></Route>
-      </Routes>
-    </div>
-
-    const [keyword,setKeyword]=useState("");
-
-      const handleChange = (event) => {
-        setKeyword(event.target.value);
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        window.location.assign(`/Search_page?query=${encodeURIComponent(keyword)}`)
-        window.location.href(`/Search_page`)
-    }
 
   return (
-    <div>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </nav>
-      
-      <section style={{ backgroundColor: 'pastelgreen' }}>
-        <h1>Reviews Simplified</h1>
-      </section>
-      
-      <section>
-        <h2>Review by Categories</h2>
-        <div className="category-grid">
-          <div className="category-item">
-            <img src="category1.jpg" alt="Category 1" />
-            <h3>Category 1</h3>
-          </div>
-          <div className="category-item">
-            <img src="category2.jpg" alt="Category 2" />
-            <h3>Category 2</h3>
-          </div>
-        </div>
-      </section>
-      
-      <section>
-        <div>
-          <form className='search_item' onSubmit={e => handleSubmit(e)}>
-              <input className='search_bar' type='text' placeholder='Search for Product'
-                  value={keyword}
-                  required
-                  onChange={handleChange} />
-                  <button type='submit'>search</button>
-          </form>
-        </div>
-      </section>
-      
-      <h1>Review Website</h1>
-      {/* <GetReview/>       */}
-      <KeywordSearch searchItem={keyword}/>
-    </div>
-  );
+    <div className="App">
+      <Routes>
+      <Route path='/' element={<Home/>}></Route>
+      <Route path='/Search_page' element={<KeywordSearch/>}></Route>
+      <Route path='/Product' element={<ProductPage />}></Route>
+      </Routes>
+      </div>
+  )
 };
 
 export default App;
