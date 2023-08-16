@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import base from './apis/base';
+import { Link, useLocation } from 'react-router-dom';
+import './keywordsearch.css'
 
-function KeywordSearch({ searchItem, setLoading }) {
-  const [products, setProducts] = useState([]);
+function KeywordSearch() {
+    const location=useLocation();
+    const searchItem = new URLSearchParams(location.search).get('query');
+    console.log(searchItem);
+    const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setLoading(true)
-    console.log(searchItem)
+    // setLoading(true)
     base.get('https://app.scrapingbee.com/api/v1', {
       params: {
-        'api_key': 'L0LWPYVDGB5ZITWJPUXPD9BZ2OTNE61FBWVBVHGQOM5DDD02NW8X6KKZEAIX61DE3NHA3QB87ZOUCAV1',
+        'api_key': 'BYZCNNS0SOZCPC4EXD5SXSH0PWAXPWFMZ4SXVEQNEDMKSGBP57K31PJ44V46344XCYN7IARKQWLS0V4X',
         'url': `https://www.flipkart.com/search?q=${searchItem}`,
         'block_resources': 'false',
       }
@@ -39,7 +43,7 @@ function KeywordSearch({ searchItem, setLoading }) {
         }
       });
       setProducts(productData);
-      setLoading(false);
+    //   setLoading(false);
     });
   }, [searchItem]);
 
@@ -49,14 +53,13 @@ function KeywordSearch({ searchItem, setLoading }) {
   }
   return (
     <>
+    <hr/>
     <h3>Search Results for {searchItem}</h3>
     <div className='product_grid'>
         <div className='product_card'>
       {products.map((product, index) => (
-        <div key={index}>
-          <button onClick={e=>handleClick(product)}>
-            <img src={product.image} alt={product.title} />
-          </button>
+        <div className='product_details' key={index}>
+            <img onClick={e=>handleClick(product)} src={product.image} alt={product.title} />
           <a target="_blank" href={product.link}>{product.title}</a>
         </div>
       ))}
