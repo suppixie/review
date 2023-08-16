@@ -59,7 +59,7 @@ function ProductPage({setLoading}) {
     <>
     <hr/>
     <div className="product_page">
-        <div>
+        <div className="leftside_details">
               <div className="image">
                     <img src={imageUrl} alt={title} />
               </div>
