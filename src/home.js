@@ -6,27 +6,25 @@ import ProductPage from './productpage';
 import { Routes, Route, } from 'react-router-dom';
 
 
-function Home({setLoading}) {
+function Home() {
   const [keyword, setKeyword] = useState("");
-  // bY STORING IN STATIC VARIBLE API WONT GET CALLED EVERYTIME ON CHNAGE   
-  let searchword = '';
-  const handleChange = (event) => {
-    searchword = event.target.value;
-  }
+  console.log(keyword);
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setKeyword(searchword)
+    window.location.assign(`/Search_page?query=${encodeURIComponent(keyword)}`)
   }
-
+  const show=false;
   return (
     <div>
       <nav>
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">Contact Us</a></li>
+          {/* <li><a href="#">Categories</a></li>
+          <li><a href="#">Contact Us</a></li> */}
         </ul>
       </nav>
+      <hr/>
 
       <section style={{ backgroundColor: 'pastelgreen' }}>
         <h1>Reviews Simplified</h1>
@@ -48,19 +46,16 @@ function Home({setLoading}) {
 
       <section>
         <div>
-          <form className='search_item' onSubmit={e => handleSubmit(e)}>
+          <form className='search_item' onSubmit={handleSubmit}>
             <input className='search_bar' type='text' placeholder='Search for Product'
 
               required
-              onChange={handleChange} />
+              onChange={(e) => setKeyword(e.target.value)}></input>
             <button type='submit'>search</button>
           </form>
         </div>
       </section>
 
-      <h1>Review Website</h1>
-      {/* <GetReview/>       */}
-      <KeywordSearch searchItem={keyword} setLoading={setLoading} />
     </div>
   );
 };

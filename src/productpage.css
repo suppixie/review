@@ -1,0 +1,20 @@
+.product_page{
+    display: flex;
+    justify-content: space-between;
+    gap: 5vw;
+    margin-top: 4vh;
+}
+.image img{
+height: 65vh;
+}
+
+.prices span{
+    text-decoration: line-through;
+}
+.rightside_details{
+    width: 60%;
+}
+
+h2{
+    color: black;
+}

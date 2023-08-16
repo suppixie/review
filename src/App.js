@@ -15,6 +15,7 @@ const App = () => {
     <div className="App">
       <Loader state={loading} />
       <BrowserRouter>
+        <h2>Reviewee</h2>
         <Routes>
           <Route path='/' element={<Home setLoading={setLoading} />}></Route>
           <Route path='/Search_page' element={<KeywordSearch />}></Route>
