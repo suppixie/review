@@ -1,8 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import GetReview from './api';
+import React,{useState} from 'react';
+import GetReview from './productpage';
 import './App.css'
+import KeywordSearch from './keywordsearch';
+import ProductPage from './productpage';
+import { Routes, Route, } from 'react-router-dom';
+
 
 const App = () => {
+  <div className="App">
+      {/* <Navbar /> */}
+      <Routes>
+        <Route path='/' element={<App/>}></Route>
+        <Route path='/Search_page' element={<KeywordSearch/>}></Route>
+        <Route path='/Product' element={<ProductPage />}></Route>
+      </Routes>
+    </div>
+
+    const [keyword,setKeyword]=useState("");
+
+      const handleChange = (event) => {
+        setKeyword(event.target.value);
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        window.location.assign(`/Search_page?query=${encodeURIComponent(keyword)}`)
+        window.location.href(`/Search_page`)
+    }
 
   return (
     <div>
@@ -29,29 +52,24 @@ const App = () => {
             <img src="category2.jpg" alt="Category 2" />
             <h3>Category 2</h3>
           </div>
-          {/* Add similar code for the remaining 4 categories */}
         </div>
       </section>
       
       <section>
-        <h2>Random Products with Ratings</h2>
-        <div className="random-products">
-          <div className="product-item">
-            <img src="product1.jpg" alt="Product 1" />
-            <h3>Product 1</h3>
-            <p>Rating: 4.5</p>
-          </div>
-          <div className="product-item">
-            <img src="product2.jpg" alt="Product 2" />
-            <h3>Product 2</h3>
-            <p>Rating: 3.8</p>
-          </div>
-          {/* Add similar code for the remaining 3 products */}
+        <div>
+          <form className='search_item' onSubmit={e => handleSubmit(e)}>
+              <input className='search_bar' type='text' placeholder='Search for Product'
+                  value={keyword}
+                  required
+                  onChange={handleChange} />
+                  <button type='submit'>search</button>
+          </form>
         </div>
       </section>
       
       <h1>Review Website</h1>
-      <GetReview/>      
+      {/* <GetReview/>       */}
+      <KeywordSearch searchItem={keyword}/>
     </div>
   );
 };
