@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import './keywordsearch.css';
+import { useCookies } from 'react-cookie';
 
-function KeywordSearch(searchItem) {
+function KeywordSearch(location) {
+    const searchItem = new URLSearchParams(location.search).get('query');
     const [products, setProducts] = useState([]);
+    const [cookies,setCookie]=useCookies(['product'])
 
     useEffect(() => {
     axios.get('https://app.scrapingbee.com/api/v1', {
       params: {
-        'api_key': 'ONFIN9MU4E2I97OPEMNQA01X5369QBWIUQPJ1LYSHH8OFCLK2WA1ZJ0KHFW76BNIMK1EB05AR9CYAWSI',
+        'api_key': 'L0LWPYVDGB5ZITWJPUXPD9BZ2OTNE61FBWVBVHGQOM5DDD02NW8X6KKZEAIX61DE3NHA3QB87ZOUCAV1',
         'url': `https://www.flipkart.com/search?q=${searchItem}`,
         'block_resources': 'false',
       }
@@ -32,7 +37,6 @@ function KeywordSearch(searchItem) {
               title: titleElement.title,
               link: `https://www.flipkart.com${productLink.getAttribute('href')}`
             };
-            console.log(product)
             productData.push(product);
             count++;
           }
@@ -40,18 +44,29 @@ function KeywordSearch(searchItem) {
       });
 
       setProducts(productData);
-    });
-  }, []);
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, [searchItem]);
+  const handleProductSelection=(product)=>{
+    setCookie('productData',product);
+  }
 
   return (
-    <div>
+    <>
+    <h3>Search Results for {searchItem}</h3>
+    <div className='product_grid'>
+        <div className='product_card'>
       {products.map((product, index) => (
-        <div key={index}>
-          <img src={product.image} alt={product.title} />
-          <a href={product.link}>{product.title}</a>
+        <div className='product_details' key={index}>
+          <img onClick={() =>handleProductSelection(product)} src={product.image} alt={product.title} /><br/>
+          <p onClick={() =>handleProductSelection(product)}>{product.title}</p>
         </div>
       ))}
+      </div>
     </div>
+    </>
   );
 }
 

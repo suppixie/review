@@ -1,0 +1,30 @@
+.product_grid{
+    
+}
+.product_card {
+    /* filter: drop-shadow(1vh 1vh 1vh black); */
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 5vh;
+
+
+}
+.product_details{
+    display: block;
+    padding: 2vh;
+    border: 1px solid gray;
+    border-radius: 20px;
+    align-content: center;
+    margin-right: 1vw;
+}
+.product_details img{
+    width: auto;
+    height: 30vh;
+}
+.product_details a{
+    margin: 0;
+    display: block;
+    max-width: 20vw;
+    text-decoration: none;
+    color: black;
+}
