@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import './keywordsearch.css';
-import { useCookies } from 'react-cookie';
+import base from './apis/base';
 
-function KeywordSearch(location) {
-    const searchItem = new URLSearchParams(location.search).get('query');
-    const [products, setProducts] = useState([]);
-    const [cookies,setCookie]=useCookies(['product'])
+function KeywordSearch({ searchItem, setLoading }) {
+  const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-    axios.get('https://app.scrapingbee.com/api/v1', {
+  useEffect(() => {
+    setLoading(true)
+    console.log(searchItem)
+    base.get('https://app.scrapingbee.com/api/v1', {
       params: {
         'api_key': 'L0LWPYVDGB5ZITWJPUXPD9BZ2OTNE61FBWVBVHGQOM5DDD02NW8X6KKZEAIX61DE3NHA3QB87ZOUCAV1',
         'url': `https://www.flipkart.com/search?q=${searchItem}`,
@@ -22,7 +19,6 @@ function KeywordSearch(location) {
       const doc = parser.parseFromString(htmlContent, 'text/html');
       const productElements = doc.querySelectorAll('._1AtVbE');
       const productData = [];
-
 
       let count = 0;
       productElements.forEach((element) => {
@@ -42,26 +38,26 @@ function KeywordSearch(location) {
           }
         }
       });
-
       setProducts(productData);
-    })
-    .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+      setLoading(false);
+    });
   }, [searchItem]);
-  const handleProductSelection=(product)=>{
-    setCookie('productData',product);
-  }
 
+  const handleClick = (product) => {
+    console.log(product);
+    window.location.assign(`/Product?link=${product.link}&imageurl=${product.image}&title=${product.title}`);
+  }
   return (
     <>
     <h3>Search Results for {searchItem}</h3>
     <div className='product_grid'>
         <div className='product_card'>
       {products.map((product, index) => (
-        <div className='product_details' key={index}>
-          <img onClick={() =>handleProductSelection(product)} src={product.image} alt={product.title} /><br/>
-          <p onClick={() =>handleProductSelection(product)}>{product.title}</p>
+        <div key={index}>
+          <button onClick={e=>handleClick(product)}>
+            <img src={product.image} alt={product.title} />
+          </button>
+          <a target="_blank" href={product.link}>{product.title}</a>
         </div>
       ))}
       </div>

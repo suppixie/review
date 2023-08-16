@@ -1,23 +1,27 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 // import Navbar from './navbar';
 import Home from './home'
-import { Routes, Route, } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import ProductPage from './productpage';
 import KeywordSearch from './keywordsearch';
+import axios from "./apis/base";
+import Loader from './Loader';
 
 
 const App = () => {
-
+  const [loading, setLoading] = useState(false)
   return (
     <div className="App">
-      <div><h1>Reviewee</h1></div>
-      <Routes>
-      <Route path='/' element={<Home/>}></Route>
-      <Route path='/Search_page' element={<KeywordSearch/>}></Route>
-      <Route path='/Search_page/Product_page' element={<ProductPage />}></Route>
-      </Routes>
-      </div>
+      <Loader state={loading} />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home setLoading={setLoading} />}></Route>
+          <Route path='/Search_page' element={<KeywordSearch />}></Route>
+          <Route path='/Product' element={<ProductPage setLoading={setLoading} />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 };
 
