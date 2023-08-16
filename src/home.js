@@ -6,7 +6,7 @@ import ProductPage from './productpage';
 import { Routes, Route, } from 'react-router-dom';
 
 
-function Home() {
+function Home({setLoading}) {
   const [keyword, setKeyword] = useState("");
   // bY STORING IN STATIC VARIBLE API WONT GET CALLED EVERYTIME ON CHNAGE   
   let searchword = '';
@@ -60,7 +60,7 @@ function Home() {
 
       <h1>Review Website</h1>
       {/* <GetReview/>       */}
-      <KeywordSearch searchItem={keyword} />
+      <KeywordSearch searchItem={keyword} setLoading={setLoading} />
     </div>
   );
 };

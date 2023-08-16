@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import base from './apis/base';
 
-function KeywordSearch(searchItem) {
+function KeywordSearch({ searchItem, setLoading }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://app.scrapingbee.com/api/v1', {
+    setLoading(true)
+    console.log(searchItem)
+    base.get('https://app.scrapingbee.com/api/v1', {
       params: {
-        'api_key': 'ONFIN9MU4E2I97OPEMNQA01X5369QBWIUQPJ1LYSHH8OFCLK2WA1ZJ0KHFW76BNIMK1EB05AR9CYAWSI',
-        'url': `https://www.flipkart.com/search?q=${searchItem.searchItem}`,
+        'api_key': 'L0LWPYVDGB5ZITWJPUXPD9BZ2OTNE61FBWVBVHGQOM5DDD02NW8X6KKZEAIX61DE3NHA3QB87ZOUCAV1',
+        'url': `https://www.flipkart.com/search?q=${searchItem}`,
         'block_resources': 'false',
       }
     }).then((response) => {
@@ -17,7 +19,6 @@ function KeywordSearch(searchItem) {
       const doc = parser.parseFromString(htmlContent, 'text/html');
       const productElements = doc.querySelectorAll('._1AtVbE');
       const productData = [];
-
 
       let count = 0;
       productElements.forEach((element) => {
@@ -39,14 +40,21 @@ function KeywordSearch(searchItem) {
         }
       });
       setProducts(productData);
+      setLoading(false);
     });
   }, [searchItem]);
-  console.log(products);
+
+  const handleClick = (product) => {
+    console.log(product);
+    window.location.assign(`/Product?link=${product.link}&imageurl=${product.image}&title=${product.title}`);
+  }
   return (
     <div>
       {products.map((product, index) => (
         <div key={index}>
-          <img src={product.image} alt={product.title} />
+          <button onClick={e=>handleClick(product)}>
+            <img src={product.image} alt={product.title} />
+          </button>
           <a target="_blank" href={product.link}>{product.title}</a>
         </div>
       ))}
