@@ -1,9 +1,26 @@
 .landing_page{
-    background-color: paleturquoise;
+    background-image: url(https://cdn.dribbble.com/users/2811827/screenshots/7862390/media/8fe98a786369b439a2d8a8d651aeaf71.png);
+    background-size:100vw 120vh;
+    background-repeat: no-repeat;
+    height: 90vh;
+
+}
+.homepage{
+    margin: 0 2vw;
+}
+.landing_page h1,  .search_item{
+    position: sticky;
+}
+.search_item input,.search_item button{
+    padding: 2vh;
+    border-radius: 15px;
 }
 
-.landing_page h1,  .search_item{
-    transform: translateX(35vw);
+.landing_page h1{
+    font-size: xxx-large;
+    letter-spacing: 1px;
+    font-family:Georgia,  serif;
+    
 }
 
 .category_grid button{

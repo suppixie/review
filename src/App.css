@@ -3,7 +3,7 @@
 /* Global styles */
 body {
   font-family: Arial, sans-serif;
-  margin: 0 2vw;
+  margin: 0;
   padding: 0;
 }
 
@@ -90,4 +90,16 @@ section {
   align-items: center;
   z-index: 10;
   color: #e3ea24;
+}
+nav{
+  /* background-color: paleturquoise; */
+  height: 5vh;
+  margin: 0;
+  overflow: hidden;
+}
+nav h2{
+  margin: 0;
+  transform: translateX(46vw);
+  font-family:Times, serif;
+  font-size: 2em;
 }

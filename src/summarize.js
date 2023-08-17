@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function Summarize({ text}) {
   const [summary, setSummary] = useState('');
-
   useEffect(() => {
     const apiKey = 'afaeb5bd0c9871c7a6835732545c191e';
     const apiUrl = 'https://api.meaningcloud.com/summarization-1.0';

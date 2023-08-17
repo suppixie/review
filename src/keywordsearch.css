@@ -1,6 +1,10 @@
-/* .product_grid{
-    
-} */
+.product_grid{
+    margin: 0 2vw;
+}
+.product_grid hr{
+    border:1vh solid plum;
+    margin: 0;
+}
 .product_card {
     /* filter: drop-shadow(1vh 1vh 1vh black); */
     display: grid;
@@ -22,12 +26,17 @@
     max-width: 40vh;
     height: 30vh;
     cursor: pointer;
+    margin-bottom: 3vh;
+}
+.product_details img:hover{
+   transform: scale(0.9);
+   transition: 0.5s;
 }
 .product_details a{
     margin: 0;
     display: block;
     max-width: 20vw;
     text-decoration: none;
-    color: black;
+    color:darkblue;
     cursor: pointer;
 }

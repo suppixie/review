@@ -1,21 +1,33 @@
 .product_page{
+    overflow-x: hidden;
     display: flex;
     justify-content: space-between;
     gap: 5vw;
     margin-top: 4vh;
+    margin: 0 2vw;
+}
+.pphr{
+    border:1vh solid plum;
+    margin: 0;
+    margin-bottom: 3vh;
 }
 .image img{
-width: 95%;}
+height: 80vh;
+}
 
 .prices span{
     text-decoration: line-through;
     font-weight: lighter;
+    color: royalblue;
 }
 .rightside_details{
     width: 55%;
 }
 .leftside_details{
     width: 45%;
+}
+.leftside_details .image{
+    height: 80vh;
 }
 
 h2{

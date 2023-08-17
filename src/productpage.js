@@ -57,7 +57,7 @@ function ProductPage({setLoading}) {
 
   return (
     <>
-    <hr/>
+    <hr className="pphr"/>
     <div className="product_page">
         <div className="leftside_details">
               <div className="image">
@@ -76,8 +76,7 @@ function ProductPage({setLoading}) {
             <div className="prices">
                 <h3>{basicDetails.priceOnFlipkart}   <span> 
                 {basicDetails.mrp}</span></h3>
-                <h3>Rating:</h3>
-                {basicDetails.rating.slice(0,3)}
+                <h3>Rating: {basicDetails.rating.slice(0,3)}</h3>
             </div>
 
             <div>
