@@ -3,14 +3,14 @@ import base from './apis/base';
 import { Link, useLocation } from 'react-router-dom';
 import './keywordsearch.css'
 
-function KeywordSearch() {
+function KeywordSearch({setLoading}) {
     const location=useLocation();
     const searchItem = new URLSearchParams(location.search).get('query');
     console.log(searchItem);
     const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // setLoading(true)
+    setLoading(true)
     base.get('https://app.scrapingbee.com/api/v1', {
       params: {
         'api_key': 'BYZCNNS0SOZCPC4EXD5SXSH0PWAXPWFMZ4SXVEQNEDMKSGBP57K31PJ44V46344XCYN7IARKQWLS0V4X',
@@ -43,7 +43,7 @@ function KeywordSearch() {
         }
       });
       setProducts(productData);
-    //   setLoading(false);
+      setLoading(false);
     });
   }, [searchItem]);
 

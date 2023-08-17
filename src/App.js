@@ -18,7 +18,7 @@ const App = () => {
         <h2>Reviewee</h2>
         <Routes>
           <Route path='/' element={<Home setLoading={setLoading} />}></Route>
-          <Route path='/Search_page' element={<KeywordSearch />}></Route>
+          <Route path='/Search_page' element={<KeywordSearch setLoading={setLoading} />}></Route>
           <Route path='/Product' element={<ProductPage setLoading={setLoading} />}></Route>
         </Routes>
       </BrowserRouter>
